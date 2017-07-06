@@ -15,31 +15,35 @@ public class Data extends Model{
     @Column(name = "userPassword")
     public String userPassword;
 
-    @Column(name = "userFirstName")
-    public String userFirstName;
+    @Column(name = "userName")
+    public String userName;
 
-    @Column(name = "userLastName")
-    public String userLastName;
+    @Column(name = "userNumber")
+    public String userNumber;
 
     public Data() {
         super();
     }
 
-    public Data( String userEmail, String userPassword, String userFirstName,String userLastName ) {
+    public Data( String userEmail, String userPassword, String userName, String userNumber ) {
         super();
         this.userEmail = userEmail;
         this.userPassword = userPassword;
-        this.userFirstName = userFirstName;
-        this.userLastName = userLastName;
+        this.userName = userName;
+        this.userNumber = userNumber;
     }
 
     public static String getValue (String userEmail){
 
-        Data data =
-         new Select("userPassword")
-                .from(Data.class)
+        Select select = new Select();
+         Data data = select.from(Data.class)
                 .where("userEmail = ?", userEmail)
                 .executeSingle();
+
+        //com.activeandroid.util.Log.d("log email :"+ data.getUserEmail());
+        //com.activeandroid.util.Log.d("log password"+ data.getUserPassword());
+        //com.activeandroid.util.Log.d("log name"+ data.getUserName());
+        //com.activeandroid.util.Log.d("log number"+ data.getUserNumber());
 
         return  data.getUserPassword();
     }
@@ -52,5 +56,11 @@ public class Data extends Model{
         return userPassword;
     }
 
+    public String getUserName() {
+        return userName;
+    }
 
+    public String getUserNumber() {
+        return userNumber;
+    }
 }

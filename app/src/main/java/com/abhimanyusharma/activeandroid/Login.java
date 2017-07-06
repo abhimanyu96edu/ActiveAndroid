@@ -3,6 +3,7 @@ package com.abhimanyusharma.activeandroid;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +20,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        //ActiveAndroid.initialize(this);
 
         signin=(Button)findViewById(R.id.signIn);
         signup=(Button)findViewById(R.id.signUp);
@@ -30,18 +30,9 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String result = String.valueOf(Data.getValue(email.getText().toString()));
+                checkIsEmpty();
 
-                Toast.makeText(Login.this, result, Toast.LENGTH_LONG).show();
 
-                if(result.equals(password.getText().toString()))
-                {
-                    Toast.makeText(Login.this, "Logged In", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(Login.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                Toast.makeText(Login.this, "Logged In Error", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -53,5 +44,39 @@ public class Login extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void checkIsEmpty() {
+
+        if(TextUtils.isEmpty(email.getText().toString())) {
+            email.setError("Cannot be Empty !!");
+            Toast.makeText(this, "Field Cannot be Empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(password.getText().toString())) {
+            password.setError("Cannot be Empty !!");
+            Toast.makeText(this, "Field Cannot be Empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //SINCE NO FIELD IS EMPTY, NOW ADD THE DATA INTO THE DATABASE
+        add();
+
+    }
+
+    private void add() {
+
+        String result = String.valueOf(Data.getValue(email.getText().toString()));
+
+        Toast.makeText(Login.this, result, Toast.LENGTH_LONG).show();
+
+        if(result.equals(password.getText().toString().trim()))
+        {
+            Toast.makeText(Login.this, "Logged In", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 }
