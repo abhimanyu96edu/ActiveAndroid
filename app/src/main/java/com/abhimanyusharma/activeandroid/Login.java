@@ -66,17 +66,28 @@ public class Login extends AppCompatActivity {
 
     private void add() {
 
-        String result = String.valueOf(Data.getValue(email.getText().toString()));
+        try {
 
-        Toast.makeText(Login.this, result, Toast.LENGTH_LONG).show();
+            String pass = String.valueOf(Data.getPasswordValue(email.getText().toString()));
 
-        if(result.equals(password.getText().toString().trim()))
-        {
-            Toast.makeText(Login.this, "Logged In", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(Login.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            if (pass.equals(password.getText().toString().trim())) {
+                //Toast.makeText(Login.this, "Logged In", Toast.LENGTH_LONG).show();
+
+                String name = String.valueOf(Data.getNameValue(email.getText().toString()));
+                Toast.makeText(Login.this, "Welcome "+ name, Toast.LENGTH_LONG).show();
+                Toast.makeText(Login.this, " Have A Great Experience At ShopView! ", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
         }
+        catch (Exception e){
 
+            //email.setText("");
+            password.setText("");
+            Toast.makeText(Login.this, "Incorrect Data! Please Try Again!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

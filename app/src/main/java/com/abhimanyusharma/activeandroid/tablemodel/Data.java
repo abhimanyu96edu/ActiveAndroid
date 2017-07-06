@@ -33,19 +33,22 @@ public class Data extends Model{
         this.userNumber = userNumber;
     }
 
-    public static String getValue (String userEmail){
+    public static String getPasswordValue (String userEmail){
 
         Select select = new Select();
          Data data = select.from(Data.class)
                 .where("userEmail = ?", userEmail)
                 .executeSingle();
-
-        //com.activeandroid.util.Log.d("log email :"+ data.getUserEmail());
-        //com.activeandroid.util.Log.d("log password"+ data.getUserPassword());
-        //com.activeandroid.util.Log.d("log name"+ data.getUserName());
-        //com.activeandroid.util.Log.d("log number"+ data.getUserNumber());
-
         return  data.getUserPassword();
+    }
+
+    public static String getNameValue (String userEmail){
+
+        Select select = new Select();
+         Data data = select.from(Data.class)
+                .where("userEmail = ?", userEmail)
+                .executeSingle();
+        return  data.getUserName();
     }
 
     public String getUserEmail() {
