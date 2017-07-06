@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.abhimanyusharma.activeandroid.tablemodel.Data;
+
 /**
  * Created by Abhimanyu Sharma on 23-06-2017.
  */
@@ -45,8 +47,8 @@ public class SignUpActivity extends AppCompatActivity {
         Data tlc = new Data();
         tlc.userFirstName = fname.getText().toString();
         tlc.userLastName = lname.getText().toString();
-        tlc.userFirstName = email.getText().toString();
-        tlc.userFirstName = password.getText().toString();
+        tlc.userEmail = email.getText().toString();
+        tlc.userPassword = password.getText().toString();
 
         tlc.save();
 
