@@ -75,7 +75,7 @@ public class Login extends AppCompatActivity {
 
                 String name = String.valueOf(Data.getNameValue(email.getText().toString()));
                 Toast.makeText(Login.this, "Welcome "+ name, Toast.LENGTH_LONG).show();
-                Toast.makeText(Login.this, " Have A Great Experience At ShopView! ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, " Have A Great! ", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 startActivity(intent);
